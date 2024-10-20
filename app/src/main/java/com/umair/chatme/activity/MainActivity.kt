@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.umair.chatme.navGraph.NavGraph
+import com.umair.chatme.navGraph.Route
 import com.umair.chatme.splash.SplashScreen
 import com.umair.chatme.ui.theme.ChatMeTheme
 
@@ -15,21 +17,8 @@ class MainActivity : ComponentActivity() {
 		enableEdgeToEdge()
 		setContent {
 			ChatMeTheme {
-				Start()
+				NavGraph(Route.AppStartNavigation.route)
 			}
 		}
-	}
-}
-
-@Composable
-private fun Start() {
-	SplashScreen()
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-	ChatMeTheme {
-		Start()
 	}
 }

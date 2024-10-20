@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,10 +24,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.umair.chatme.R
+import com.umair.chatme.navGraph.Route
+import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(navController: NavController) {
 	Surface(
 		modifier = Modifier
 			.fillMaxSize()
@@ -61,6 +66,15 @@ fun SplashScreen() {
 				fontSize = 50.sp,
 				fontWeight = FontWeight.Bold
 				)
+
+			LaunchedEffect(true) {
+				delay(2000)
+				navController.navigate(Route.SigninScreen.route) {
+					this.popUpTo(Route.SplashScreen.route) {
+						inclusive = true
+					}
+				}
+			}
 		}//: Column
 	}//: Surface
 }
@@ -68,5 +82,5 @@ fun SplashScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-	SplashScreen()
+	SplashScreen(navController = rememberNavController())
 }
