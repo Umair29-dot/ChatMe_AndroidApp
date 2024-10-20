@@ -18,7 +18,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SignInScreen() {
+fun SignUpScreen() {
+	var userName = remember {
+		mutableStateOf("")
+	}
 	var email = remember {
 		mutableStateOf("")
 	}
@@ -34,6 +37,17 @@ fun SignInScreen() {
 			verticalArrangement = Arrangement.Center,
 			horizontalAlignment = Alignment.CenterHorizontally
 		) {
+			OutlinedTextField(
+				value = userName.value,
+				onValueChange = { userName.value = it},
+				label = { Text("Username") }
+			)
+
+			Spacer(
+				modifier = Modifier
+					.height(10.dp)
+			)
+
 			OutlinedTextField(
 				value = email.value,
 				onValueChange = { email.value = it},
@@ -56,8 +70,6 @@ fun SignInScreen() {
 					.height(10.dp)
 			)
 
-			Text("Forget Password")
-
 			Spacer(
 				modifier = Modifier
 					.height(20.dp)
@@ -68,15 +80,13 @@ fun SignInScreen() {
 
 				}
 			) {
-				Text("Login")
+				Text("SignUp")
 			}
 
 			Spacer(
 				modifier = Modifier
 					.height(10.dp)
 			)
-
-			Text("Don't have an account? Signup")
 		}//: Column
 	}//: Surface
 }
@@ -84,5 +94,5 @@ fun SignInScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-	SignInScreen()
+	SignUpScreen()
 }
