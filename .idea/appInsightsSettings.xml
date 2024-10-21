@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.umair.chatme" />
+                  <option name="mobileSdkAppId" value="1:648437763896:android:9ade6d46416a6bcf8f7bcd" />
+                  <option name="projectId" value="chatme-34cb2" />
+                  <option name="projectNumber" value="648437763896" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

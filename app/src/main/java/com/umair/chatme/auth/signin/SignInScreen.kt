@@ -1,13 +1,16 @@
 package com.umair.chatme.auth.signin
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -44,7 +47,8 @@ fun SignInScreen(navController: NavController) {
 			.fillMaxSize()
 	) {
 		Column(
-			modifier = Modifier.padding(20.dp),
+			modifier = Modifier.padding(20.dp)
+				.verticalScroll(rememberScrollState()),
 			horizontalAlignment = Alignment.CenterHorizontally
 		) {
 			Spacer(
@@ -107,7 +111,7 @@ fun SignInScreen(navController: NavController) {
 
 			Button(
 				onClick = {
-					navController.navigate(Route.SignUpScreen.route)
+					//navController.navigate(Route.SignUpScreen.route)
 				},
 				modifier = Modifier.fillMaxWidth()
 			) {
@@ -120,7 +124,10 @@ fun SignInScreen(navController: NavController) {
 			)
 
 			Text("Don't have an account? Signup",
-				modifier = Modifier.fillMaxWidth(),
+				modifier = Modifier.fillMaxWidth()
+					.clickable {
+						navController.navigate(Route.SignUpScreen.route)
+					},
 				textAlign = TextAlign.Center
 				)
 		}//: Column

@@ -10,7 +10,9 @@ import com.umair.chatme.navGraph.NavGraph
 import com.umair.chatme.navGraph.Route
 import com.umair.chatme.splash.SplashScreen
 import com.umair.chatme.ui.theme.ChatMeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)

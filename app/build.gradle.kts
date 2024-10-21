@@ -3,7 +3,8 @@ plugins {
 	alias(libs.plugins.kotlin.android)
 	alias(libs.plugins.kotlin.compose)
 	id("kotlin-kapt")  //For dagger hilt
-	id("com.google.dagger.hilt.android")  //For dagger hilt
+	id("com.google.dagger.hilt.android")
+	alias(libs.plugins.google.gms.google.services)  //For dagger hilt
 }
 
 android {
@@ -51,6 +52,7 @@ dependencies {
 	implementation(libs.androidx.ui.graphics)
 	implementation(libs.androidx.ui.tooling.preview)
 	implementation(libs.androidx.material3)
+	implementation(libs.firebase.auth)
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)
 	androidTestImplementation(libs.androidx.espresso.core)
@@ -65,4 +67,5 @@ dependencies {
 	// Dagger Hilt
 	implementation("com.google.dagger:hilt-android:2.52")
 	kapt("com.google.dagger:hilt-compiler:2.52")
+	implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 }
