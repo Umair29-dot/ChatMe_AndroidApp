@@ -1,7 +1,6 @@
-package com.umair.chatme.auth
+package com.umair.chatme.auth.signup
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -23,13 +23,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.umair.chatme.R
 
 @Composable
-fun SignInScreen() {
+fun SignUpScreen(navController: NavController) {
+	var userName = remember {
+		mutableStateOf("")
+	}
+	var phoneNumber = remember {
+		mutableStateOf("")
+	}
 	var email = remember {
 		mutableStateOf("")
 	}
@@ -45,6 +52,11 @@ fun SignInScreen() {
 			modifier = Modifier.padding(20.dp),
 			horizontalAlignment = Alignment.CenterHorizontally
 		) {
+			Spacer(
+				modifier = Modifier
+					.height(20.dp)
+			)
+
 			Image(
 				painter = painterResource(R.drawable.person_chatting_3d),
 				contentDescription = "Icon",
@@ -74,6 +86,21 @@ fun SignInScreen() {
 			)
 
 			OutlinedTextField(
+				value = email.value,
+				onValueChange = { email.value = it},
+				label = { Text("Phone Number") },
+				shape = RoundedCornerShape(10.dp),
+				modifier = Modifier.fillMaxWidth(),
+				leadingIcon = { Icon(imageVector = Icons.Filled.Phone, contentDescription = "Phone Icon") },
+				singleLine = true
+			)
+
+			Spacer(
+				modifier = Modifier
+					.height(10.dp)
+			)
+
+			OutlinedTextField(
 				value = password.value,
 				onValueChange = { password.value = it},
 				label = { Text("Password") },
@@ -85,37 +112,17 @@ fun SignInScreen() {
 
 			Spacer(
 				modifier = Modifier
-					.height(10.dp)
-			)
-
-			Text("Forget Password?",
-				modifier = Modifier.fillMaxWidth(),
-				textAlign = TextAlign.End
-				)
-
-			Spacer(
-				modifier = Modifier
-					.height(20.dp)
+					.height(30.dp)
 			)
 
 			Button(
 				onClick = {
-
+					navController.popBackStack()
 				},
 				modifier = Modifier.fillMaxWidth()
 			) {
-				Text("Sign In")
+				Text("Sign Up")
 			}
-
-			Spacer(
-				modifier = Modifier
-					.height(10.dp)
-			)
-
-			Text("Don't have an account? Signup",
-				modifier = Modifier.fillMaxWidth(),
-				textAlign = TextAlign.Center
-				)
 		}//: Column
 	}//: Surface
 }
@@ -123,5 +130,5 @@ fun SignInScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-	SignInScreen()
+	SignUpScreen(navController = rememberNavController())
 }

@@ -69,7 +69,7 @@ fun SplashScreen(navController: NavController) {
 
 			LaunchedEffect(true) {
 				delay(2000)
-				navController.navigate(Route.SigninScreen.route) {
+				navController.navigate(Route.SignInScreen.route) {
 					this.popUpTo(Route.SplashScreen.route) {
 						inclusive = true
 					}

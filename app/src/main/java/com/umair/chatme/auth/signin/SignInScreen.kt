@@ -1,7 +1,6 @@
-package com.umair.chatme.auth
+package com.umair.chatme.auth.signin
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -27,16 +25,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.umair.chatme.R
+import com.umair.chatme.navGraph.Route
 
 @Composable
-fun SignUpScreen() {
-	var userName = remember {
-		mutableStateOf("")
-	}
-	var phoneNumber = remember {
-		mutableStateOf("")
-	}
+fun SignInScreen(navController: NavController) {
 	var email = remember {
 		mutableStateOf("")
 	}
@@ -52,6 +47,11 @@ fun SignUpScreen() {
 			modifier = Modifier.padding(20.dp),
 			horizontalAlignment = Alignment.CenterHorizontally
 		) {
+			Spacer(
+				modifier = Modifier
+					.height(20.dp)
+			)
+
 			Image(
 				painter = painterResource(R.drawable.person_chatting_3d),
 				contentDescription = "Icon",
@@ -81,21 +81,6 @@ fun SignUpScreen() {
 			)
 
 			OutlinedTextField(
-				value = email.value,
-				onValueChange = { email.value = it},
-				label = { Text("Phone Number") },
-				shape = RoundedCornerShape(10.dp),
-				modifier = Modifier.fillMaxWidth(),
-				leadingIcon = { Icon(imageVector = Icons.Filled.Phone, contentDescription = "Phone Icon") },
-				singleLine = true
-			)
-
-			Spacer(
-				modifier = Modifier
-					.height(10.dp)
-			)
-
-			OutlinedTextField(
 				value = password.value,
 				onValueChange = { password.value = it},
 				label = { Text("Password") },
@@ -107,17 +92,37 @@ fun SignUpScreen() {
 
 			Spacer(
 				modifier = Modifier
+					.height(10.dp)
+			)
+
+			Text("Forget Password?",
+				modifier = Modifier.fillMaxWidth(),
+				textAlign = TextAlign.End
+				)
+
+			Spacer(
+				modifier = Modifier
 					.height(20.dp)
 			)
 
 			Button(
 				onClick = {
-
+					navController.navigate(Route.SignUpScreen.route)
 				},
 				modifier = Modifier.fillMaxWidth()
 			) {
-				Text("Sign Up")
+				Text("Sign In")
 			}
+
+			Spacer(
+				modifier = Modifier
+					.height(10.dp)
+			)
+
+			Text("Don't have an account? Signup",
+				modifier = Modifier.fillMaxWidth(),
+				textAlign = TextAlign.Center
+				)
 		}//: Column
 	}//: Surface
 }
@@ -125,5 +130,5 @@ fun SignUpScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-	SignUpScreen()
+	SignInScreen(navController = rememberNavController())
 }

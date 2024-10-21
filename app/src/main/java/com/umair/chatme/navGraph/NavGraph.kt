@@ -5,6 +5,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.umair.chatme.auth.signin.SignInScreen
+import com.umair.chatme.auth.signup.SignUpScreen
 import com.umair.chatme.splash.SplashScreen
 
 @Composable
@@ -20,8 +22,11 @@ fun NavGraph(startDestination: String) {
 			composable(route = Route.SplashScreen.route) {
 				SplashScreen(navController = navController)
 			}
-			composable(route = Route.SigninScreen.route) {
-
+			composable(route = Route.SignInScreen.route) {
+				SignInScreen(navController = navController)
+			}
+			composable(route = Route.SignUpScreen.route) {
+				SignUpScreen(navController = navController)
 			}
 		}
 	}
