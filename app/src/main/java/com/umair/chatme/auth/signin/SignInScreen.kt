@@ -1,5 +1,6 @@
 package com.umair.chatme.auth.signin
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -15,32 +16,40 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.umair.chatme.R
 import com.umair.chatme.navGraph.Route
+import com.umair.chatme.util.Resource
 
 @Composable
-fun SignInScreen(navController: NavController) {
+fun SignInScreen(navController: NavController, viewModel: SignInViewModel) {
 	var email = remember {
 		mutableStateOf("")
 	}
 	var password = remember {
 		mutableStateOf("")
 	}
+	val context = LocalContext.current
+	val result = viewModel.result.collectAsState().value
 
 	Surface(
 		modifier = Modifier
@@ -111,7 +120,7 @@ fun SignInScreen(navController: NavController) {
 
 			Button(
 				onClick = {
-					//navController.navigate(Route.SignUpScreen.route)
+					viewModel.userSignIn(email.value.trim(), password.value.trim())
 				},
 				modifier = Modifier.fillMaxWidth()
 			) {
@@ -129,7 +138,23 @@ fun SignInScreen(navController: NavController) {
 						navController.navigate(Route.SignUpScreen.route)
 					},
 				textAlign = TextAlign.Center
-				)
+			)
+
+			when(result) {
+				is Resource.Loading -> {
+					CircularProgressIndicator()
+				}
+				is Resource.Success -> {
+					LaunchedEffect(true) {
+						//navController.navigate(Route.SignUpScreen.route)
+						Toast.makeText(context, "Login success", Toast.LENGTH_SHORT).show()
+					}
+				}
+				is Resource.Error -> {
+					Toast.makeText(context, result.message.toString(), Toast.LENGTH_SHORT).show()
+				}
+				is Resource.ideal -> {}
+			}
 		}//: Column
 	}//: Surface
 }
@@ -137,5 +162,8 @@ fun SignInScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-	SignInScreen(navController = rememberNavController())
+	SignInScreen(
+		navController = rememberNavController(),
+		viewModel = hiltViewModel()
+	)
 }

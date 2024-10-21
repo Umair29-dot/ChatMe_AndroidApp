@@ -57,7 +57,6 @@ fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel) {
 		mutableStateOf("")
 	}
 	val context = LocalContext.current
-
 	val result = viewModel.result.collectAsState().value
 
 	Surface(

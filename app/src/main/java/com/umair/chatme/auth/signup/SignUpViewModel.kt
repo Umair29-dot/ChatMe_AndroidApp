@@ -7,17 +7,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.umair.chatme.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-	val auth: FirebaseAuth
+	private val auth: FirebaseAuth
 ): ViewModel() {
 
 	private val LOG = "SignupViewModel"
