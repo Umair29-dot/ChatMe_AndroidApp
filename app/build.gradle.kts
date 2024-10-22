@@ -52,7 +52,6 @@ dependencies {
 	implementation(libs.androidx.ui.graphics)
 	implementation(libs.androidx.ui.tooling.preview)
 	implementation(libs.androidx.material3)
-	implementation(libs.firebase.auth)
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)
 	androidTestImplementation(libs.androidx.espresso.core)
@@ -68,4 +67,8 @@ dependencies {
 	implementation("com.google.dagger:hilt-android:2.52")
 	kapt("com.google.dagger:hilt-compiler:2.52")
 	implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+	//Firebase
+	implementation(libs.firebase.auth)
+	implementation(libs.firebase.firestore)
 }

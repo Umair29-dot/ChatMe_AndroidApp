@@ -151,7 +151,9 @@ fun SignInScreen(navController: NavController, viewModel: SignInViewModel) {
 					}
 				}
 				is Resource.Error -> {
-					Toast.makeText(context, result.message.toString(), Toast.LENGTH_SHORT).show()
+					LaunchedEffect(true) {
+						Toast.makeText(context, result.message.toString(), Toast.LENGTH_SHORT).show()
+					}
 				}
 				is Resource.ideal -> {}
 			}
