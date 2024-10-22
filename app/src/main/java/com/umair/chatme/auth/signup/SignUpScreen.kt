@@ -14,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -78,12 +79,27 @@ fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel) {
 				contentDescription = "Icon",
 				modifier = Modifier
 					.fillMaxWidth()
-					.height(300.dp)
+					.height(250.dp)
 			)
 
 			Spacer(
 				modifier = Modifier
-					.height(20.dp)
+					.height(15.dp)
+			)
+
+			OutlinedTextField(
+				value = userName.value,
+				onValueChange = { userName.value = it},
+				label = { Text("Username") },
+				shape = RoundedCornerShape(10.dp),
+				modifier = Modifier.fillMaxWidth(),
+				leadingIcon = { Icon(imageVector = Icons.Default.Person, contentDescription = "Email Icon") },
+				singleLine = true
+			)
+
+			Spacer(
+				modifier = Modifier
+					.height(7.dp)
 			)
 
 			OutlinedTextField(
@@ -98,7 +114,7 @@ fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel) {
 
 			Spacer(
 				modifier = Modifier
-					.height(10.dp)
+					.height(7.dp)
 			)
 
 			OutlinedTextField(
@@ -113,7 +129,7 @@ fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel) {
 
 			Spacer(
 				modifier = Modifier
-					.height(10.dp)
+					.height(7.dp)
 			)
 
 			OutlinedTextField(
@@ -128,7 +144,7 @@ fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel) {
 
 			Spacer(
 				modifier = Modifier
-					.height(30.dp)
+					.height(20.dp)
 			)
 
 			Button(
@@ -156,7 +172,9 @@ fun SignUpScreen(navController: NavController, viewModel: SignUpViewModel) {
 					}
 				}
 				is Resource.Error -> {
-					Toast.makeText(context, result.message.toString(), Toast.LENGTH_SHORT).show()
+					LaunchedEffect(true) {
+						Toast.makeText(context, result.message.toString(), Toast.LENGTH_SHORT).show()
+					}
 				}
 				is Resource.ideal -> {}
 			}
