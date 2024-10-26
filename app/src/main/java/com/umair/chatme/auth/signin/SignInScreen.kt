@@ -120,7 +120,12 @@ fun SignInScreen(navController: NavController, viewModel: SignInViewModel) {
 
 			Button(
 				onClick = {
-					viewModel.userSignIn(email.value.trim(), password.value.trim())
+					navController.navigate(Route.AppChatNavigation.route) {
+						this.popUpTo(route = Route.AppStartNavigation.route){
+							inclusive = true
+						}
+					}
+					//viewModel.userSignIn(email.value.trim(), password.value.trim())
 				},
 				modifier = Modifier.fillMaxWidth()
 			) {
@@ -146,8 +151,11 @@ fun SignInScreen(navController: NavController, viewModel: SignInViewModel) {
 				}
 				is Resource.Success -> {
 					LaunchedEffect(true) {
-						//navController.navigate(Route.SignUpScreen.route)
-						Toast.makeText(context, "Login success", Toast.LENGTH_SHORT).show()
+						navController.navigate(Route.AppChatNavigation.route) {
+							this.popUpTo(route = Route.AppStartNavigation.route){
+								inclusive = true
+							}
+						}
 					}
 				}
 				is Resource.Error -> {

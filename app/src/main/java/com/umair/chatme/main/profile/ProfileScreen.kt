@@ -1,4 +1,4 @@
-package com.umair.chatme.main.chat
+package com.umair.chatme.main.profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.umair.chatme.R
 
 @Composable
-fun ChatScreen() {
+fun ProfileScreen() {
 	Surface(
 		modifier = Modifier
 			.fillMaxSize()
@@ -31,5 +31,5 @@ fun ChatScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
-	ChatScreen()
+	ProfileScreen()
 }

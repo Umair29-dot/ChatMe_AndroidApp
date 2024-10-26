@@ -10,6 +10,7 @@ import com.umair.chatme.auth.signin.SignInScreen
 import com.umair.chatme.auth.signin.SignInViewModel
 import com.umair.chatme.auth.signup.SignUpScreen
 import com.umair.chatme.auth.signup.SignUpViewModel
+import com.umair.chatme.main.bottomNav.BottomNavScreen
 import com.umair.chatme.splash.SplashScreen
 
 @Composable
@@ -32,6 +33,15 @@ fun NavGraph(startDestination: String) {
 			composable(route = Route.SignUpScreen.route) {
 				val viewModel: SignUpViewModel = hiltViewModel()
 				SignUpScreen(navController = navController, viewModel = viewModel)
+			}
+
+			navigation(
+				route = Route.AppChatNavigation.route,
+				startDestination = Route.BottomNavScreen.route
+			) {
+				composable(route = Route.BottomNavScreen.route) {
+					BottomNavScreen()
+				}
 			}
 		}
 	}
