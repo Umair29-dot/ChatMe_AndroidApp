@@ -2,6 +2,7 @@ package com.umair.chatme.navGraph
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -11,6 +12,7 @@ import com.umair.chatme.auth.signin.SignInViewModel
 import com.umair.chatme.auth.signup.SignUpScreen
 import com.umair.chatme.auth.signup.SignUpViewModel
 import com.umair.chatme.main.bottomNav.BottomNavScreen
+import com.umair.chatme.main.bottomNav.BottomNavViewModel
 import com.umair.chatme.splash.SplashScreen
 
 @Composable
@@ -40,7 +42,8 @@ fun NavGraph(startDestination: String) {
 				startDestination = Route.BottomNavScreen.route
 			) {
 				composable(route = Route.BottomNavScreen.route) {
-					BottomNavScreen()
+					val viewModel: BottomNavViewModel = viewModel()
+					BottomNavScreen(viewModel)
 				}
 			}
 		}

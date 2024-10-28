@@ -120,12 +120,7 @@ fun SignInScreen(navController: NavController, viewModel: SignInViewModel) {
 
 			Button(
 				onClick = {
-					navController.navigate(Route.AppChatNavigation.route) {
-						this.popUpTo(route = Route.AppStartNavigation.route){
-							inclusive = true
-						}
-					}
-					//viewModel.userSignIn(email.value.trim(), password.value.trim())
+					viewModel.userSignIn(email.value.trim(), password.value.trim())
 				},
 				modifier = Modifier.fillMaxWidth()
 			) {
