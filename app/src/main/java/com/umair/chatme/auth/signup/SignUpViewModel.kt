@@ -5,15 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.umair.chatme.data.UserProfile
-import com.umair.chatme.util.Constants
+import com.umair.chatme.data.User
 import com.umair.chatme.util.Constants.USER_COLLECTION
 import com.umair.chatme.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,7 +33,7 @@ class SignUpViewModel @Inject constructor(
 			viewModelScope.launch(Dispatchers.IO) {
 				auth.createUserWithEmailAndPassword(email, password)
 					.addOnSuccessListener {
-						val profile = UserProfile(
+						val profile = User(
 							uid = it.user!!.uid,
 							userName = userName,
 							email = email,
@@ -54,7 +52,7 @@ class SignUpViewModel @Inject constructor(
 		}
 	}
 
-	private fun createUserProfile(userProfile: UserProfile) {
+	private fun createUserProfile(userProfile: User) {
 		db.collection(USER_COLLECTION).document(userProfile.uid)
 			.set(userProfile)
 			.addOnSuccessListener {

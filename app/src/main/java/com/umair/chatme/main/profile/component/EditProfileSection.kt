@@ -1,7 +1,8 @@
 package com.umair.chatme.main.profile.component
 
-import androidx.compose.foundation.Image
+import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,19 +31,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import coil.size.Scale
 import com.umair.chatme.R
-import com.umair.chatme.data.UserProfile
+import com.umair.chatme.data.User
 
 @Composable
-fun EditProfileSection(user: UserProfile) {
-	val image: String? = null
-
+fun EditProfileSection(user: User, updateProfilePic: () -> Unit = {}, editProfile: () -> Unit = {}) {
 	Card(
 		modifier = Modifier
 			.fillMaxWidth()
@@ -58,14 +60,17 @@ fun EditProfileSection(user: UserProfile) {
 			verticalArrangement = Arrangement.Center,
 			horizontalAlignment = Alignment.CenterHorizontally
 		) {
-			if(!image.isNullOrBlank()) {
-				Image(
-					painter = painterResource(R.drawable.my_pic),
-					contentScale = ContentScale.FillBounds,
-					contentDescription = "user photo",
+			if(!user.profilePhoto.isNullOrBlank()) {
+				AsyncImage(
+					model = ImageRequest.Builder(LocalContext.current)
+						.data(user.profilePhoto)
+						.crossfade(true)
+						.scale(Scale.FILL)
+						.build(),
+					contentDescription = "User photo",
+					contentScale = ContentScale.Crop,
 					modifier = Modifier
 						.clip(CircleShape)
-						.background(colorResource(R.color.black))
 						.size(100.dp)
 				)
 			} else {
@@ -86,9 +91,12 @@ fun EditProfileSection(user: UserProfile) {
 					) {
 						Icon(
 							imageVector = Icons.Filled.Edit,
-							contentDescription = "Edit",
+							contentDescription = "Edit Icon",
 							tint = Color.Blue,
 							modifier = Modifier.size(20.dp)
+								.clickable {
+									updateProfilePic.invoke()
+								}
 						)
 					}
 				}
@@ -134,7 +142,7 @@ fun EditProfileSection(user: UserProfile) {
 @Composable
 private fun Preview() {
 	EditProfileSection(
-		user = UserProfile(
+		user = User(
 			uid = "11223",
 			userName = "Umair Nazim",
 			email = "umair@gmail.com",

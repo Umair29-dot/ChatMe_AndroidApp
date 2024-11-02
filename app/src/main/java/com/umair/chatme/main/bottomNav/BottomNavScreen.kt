@@ -21,6 +21,7 @@ import com.umair.chatme.main.MainScreens
 import com.umair.chatme.main.bottomNav.component.BottomNavMenu
 import com.umair.chatme.main.bottomNav.component.TopBarSection
 import com.umair.chatme.main.chat.ChatScreen
+import com.umair.chatme.main.chat.ChatViewModel
 import com.umair.chatme.main.profile.ProfileScreen
 import com.umair.chatme.main.profile.ProfileViewModel
 import com.umair.chatme.navGraph.Route
@@ -79,7 +80,8 @@ fun BottomNavScreen(viewModel: BottomNavViewModel) {
 		) {
 			composable(route = Route.ChatScreen.route) {
 				viewModel.setScreenTitle(MainScreens.Chat.name)
-				ChatScreen()
+				val viewModel: ChatViewModel = hiltViewModel()
+				ChatScreen(viewModel = viewModel)
 			}
 			composable(route = Route.StatusScreen.route) {
 				viewModel.setScreenTitle(MainScreens.Status.name)

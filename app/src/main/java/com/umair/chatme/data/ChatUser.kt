@@ -1,6 +1,6 @@
 package com.umair.chatme.data
 
-data class UserProfile(
+data class ChatUser(
 	val uid: String,
 	val userName: String,
 	val email: String,
@@ -8,5 +8,5 @@ data class UserProfile(
 	val profilePhoto: String? = null,
 	val isOnline: Boolean
 ) {
-	constructor(): this(uid = "0", userName = "", email = "", phoneNo = "",profilePhoto = null, isOnline = false)
+	constructor(): this(uid = "0", userName = "", email = "", phoneNo = "", profilePhoto = null, isOnline = false)
 }
